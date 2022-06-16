@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\blazorServer",
+    "\\blazorServer\\Properties",
+    "\\blazorServer\\Shared",
+    "\\blazorServer\\wwwroot",
+    "\\blazorServer\\wwwroot\\css",
+    "\\blazorServer\\wwwroot\\css\\bootstrap",
+    "\\blazorServer\\wwwroot\\css\\open-iconic"
+  ],
+  "SelectedNode": "\\blazorServer",
+  "PreviewInSolutionExplorer": false
+}

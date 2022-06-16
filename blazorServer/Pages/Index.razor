@@ -1,0 +1,182 @@
+﻿@page "/"
+@{
+    // like Main() ??
+    GenerateData();
+    GetDb2Data();
+}
+@code {
+    private string quote = "The future depends on what you do today...";
+    private List<SaleInfo> db2Source = new List<SaleInfo>();
+    private List<Product> dummyProducts = new List<Product>();
+    private List<SaleInfo> dummySales = new List<SaleInfo>();
+    private RemoteJson dummyExcel = RemoteJson.WithUri("https://excel2json.io/api/share/454ce21d1a3f482fbbbc4155d2dba14c");
+
+    private void Stop() { int x = 0; int y = 0; int z = x / y; }
+    private async void GetDb2Data()
+    {
+        List<DataRow> rows = await RunQuery();
+        List<SaleInfo> sales = new();
+        double counter = 0;
+        foreach (DataRow row in rows)
+        {
+            sales.Add(new SaleInfo()
+                {
+                    ProductID = counter++,
+                    ProductName = ""
+                });
+        }
+        db2Source = sales;
+        quote = sales.Count.ToString();
+    }
+    private async Task<List<DataRow>> RunQuery()
+    {
+        SQL dsna1 = new SQL(@"DSN=DSNA1;UID=C085365;PWD=M0NKEYS9;DATABASE=DSNA1;PROTOCOL=TCPIP;HOSTNAME=sbrysa1.ash.cpc.ibm.com;PORT=5000;QUERYTIMEOUT=600;", "select * from c.openh3 fetch first 50 rows only", Driver.Db2);
+        dsna1.Execute(true);
+        dsna1.Completed += QueryCompleted;
+        while (dsna1.Busy) { await Task.Delay(50); }
+        quote = dsna1.Response;
+        return dsna1.Table.AsEnumerable().ToList();
+    }
+    private void QueryCompleted(object sender, ResponseEventArgs? e)
+    {
+        SQL dsna1 = (SQL)sender;
+        dsna1.Completed += QueryCompleted;
+        List<SaleInfo> sales = new();
+        double counter = 0;
+        foreach (DataRow row in dsna1.Table.AsEnumerable())
+        {
+            sales.Add(new SaleInfo()
+                {
+                    ProductID = counter++,
+                    ProductName = ""
+                });
+        }
+        this.db2Source = sales;
+        quote = $"The future depends on what you do today. - Mahatma Gandhi {sales.Count}"; // works, but quote is not updated in the <h1>
+                                                                                            //Stop();
+    }
+
+    private void WroteFiles(object? sender, MongoEventArgs mea) { quote = $"The future depends on what you do today. - Mahatma Gandhi {mea.Products.Count}"; }
+
+    private void GenerateData()
+    {
+        var fh = new mongoFlaghouse.ReadWrite();
+        this.dummyProducts = fh.Read();
+        //Stop();
+        string[] names = new string[] {
+            "Intel CPU", "AMD CPU",
+            "Intel Motherboard", "AMD Motherboard", "Nvidia Motherboard",
+            "Nvidia GPU", "Gigabyte GPU", "Asus GPU", "AMD GPU", "MSI GPU",
+            "Corsair Memory", "Patriot Memory", "Skill Memory",
+            "Samsung HDD", "WD HDD", "Seagate HDD", "Intel HDD", "Asus HDD",
+            "Samsung SSD", "WD SSD", "Seagate SSD", "Intel SSD", "Asus SSD",
+            "Samsung Monitor", "Asus Monitor", "LG Monitor", "HP Monitor" };
+        string[] countries = new string[] {
+            "USA", "UK", "France", "Canada", "Poland",
+            "Denmark", "Croatia", "Australia", "Seychelles",
+            "Sweden", "Germany", "Japan", "Ireland",
+            "Barbados", "Jamaica", "Cuba", "Spain", };
+        string[] status = new string[] { "Packing", "Shipped", "Delivered" };
+
+        var sales = new List<SaleInfo>();
+
+        for (var i = 0; i < 200; i++)
+        {
+            var price = GetRandomNumber(10000, 90000) / 100;
+            var items = GetRandomNumber(4, 30);
+            var value = Math.Round(price * items);
+            var margin = GetRandomNumber(2, 5);
+            var profit = Math.Round((price * margin / 100) * items);
+            var country = GetRandomItem(countries);
+
+            var item = new SaleInfo()
+            {
+                Country = country,
+                CountryFlag = GetCountryFlag(country),
+                Margin = margin,
+                OrderDate = GetRandomDate(),
+                OrderItems = items,
+                OrderValue = value,
+                ProductID = 1001 + i,
+                ProductName = GetRandomItem(names),
+                ProductPrice = price,
+                Profit = Math.Round(profit),
+                Status = GetRandomItem(status)
+            };
+            sales.Add(item);
+        }
+
+        this.dummySales = sales;
+    }
+    private double GetRandomNumber(double min, double max)
+    {
+        Random rand = new Random();
+        return Math.Round(min + (rand.NextDouble() * (max - min)));
+    }
+    private string GetRandomItem(string[] array)
+    {
+        var index = (int)Math.Round(GetRandomNumber(0, array.Length - 1));
+        return array[index];
+    }
+    private DateTime GetRandomDate()
+    {
+        var today = new DateTime();
+        var year = today.Year;
+        var month = this.GetRandomNumber(1, 9);
+        var day = this.GetRandomNumber(10, 27);
+        return new DateTime(year, (int)month, (int)day);
+    }
+    private string GetCountryFlag(string country)
+    {
+        var flag = "https://static.infragistics.com/xplatform/images/flags/" + country + ".png";
+        return flag;
+    }
+    private class SaleInfo
+    {
+        public string Status { get; set; } = string.Empty;
+        public string ProductName { get; set; } = string.Empty;
+        public string CountryFlag { get; set; } = string.Empty;
+        public string Country { get; set; } = string.Empty;
+        public DateTime OrderDate { get; set; }
+        public double Profit { get; set; }
+        public double ProductPrice { get; set; }
+        public double ProductID { get; set; }
+        public double OrderValue { get; set; }
+        public double OrderItems { get; set; }
+        public double Margin { get; set; }
+    }
+}
+
+<PageTitle>Index</PageTitle>
+
+<h1>@quote</h1>
+
+Welcome to your new app.
+
+@*<IgbDataGrid Height="100%" Width="100%" DataSource="@datasource1" AutoGenerateColumns="false">
+    <IgbTextColumn Field="ProductID" Width="110" HeaderText="ID" HorizontalAlignment="CellContentHorizontalAlignment.Center" />
+    <IgbTextColumn Field="ProductName" HeaderText="Product" Width="120" />
+    <IgbImageColumn Field="CountryFlag" HeaderText="Country" Width="130"/>
+    <IgbNumericColumn Field="ProductPrice" HeaderText="Price" Width="110" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbNumericColumn Field="OrderItems" HeaderText="Orders" Width="140" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbNumericColumn Field="OrderValue" HeaderText="Order Value" Width="160" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbDateTimeColumn Field="OrderDate" HeaderText="Order Date" Width="150" DateTimeFormat="DateTimeFormats.DateShort" />
+    <IgbNumericColumn Field="Margin" Width="140" PositivePrefix="$"/>
+    <IgbNumericColumn Field="Profit" Width="140" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbTextColumn Field="Status" Width="140" />
+</IgbDataGrid>*@
+
+<IgbDataGrid Height="100%" Width="100%" DataSource="@dummySales" AutoGenerateColumns="false">
+    <IgbTextColumn Field="ProductID" Width="110" HeaderText="ID" HorizontalAlignment="CellContentHorizontalAlignment.Center" />
+    <IgbTextColumn Field="ProductName" HeaderText="Product" Width="120" />
+    <IgbImageColumn Field="CountryFlag" HeaderText="Country" Width="130"/>
+    <IgbNumericColumn Field="ProductPrice" HeaderText="Price" Width="110" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbNumericColumn Field="OrderItems" HeaderText="Orders" Width="140" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbNumericColumn Field="OrderValue" HeaderText="Order Value" Width="160" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbDateTimeColumn Field="OrderDate" HeaderText="Order Date" Width="150" DateTimeFormat="DateTimeFormats.DateShort" />
+    <IgbNumericColumn Field="Margin" Width="140" PositivePrefix="$"/>
+    <IgbNumericColumn Field="Profit" Width="140" PositivePrefix="$" ShowGroupingSeparator="true" MaxFractionDigits="0" MinFractionDigits="0" />
+    <IgbTextColumn Field="Status" Width="140" />
+</IgbDataGrid>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
