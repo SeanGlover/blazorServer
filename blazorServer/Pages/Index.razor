@@ -1,4 +1,9 @@
 ﻿@page "/"
+@using System.Diagnostics
+@using Newtonsoft.Json.Linq
+@using cloudant
+@using db2online
+@using DataTableAsync
 @{
     // like Main() ??
     GenerateData();
@@ -7,17 +12,17 @@
 @code {
     private string quote = "The future depends on what you do today...";
     private List<SaleInfo> db2Source = new List<SaleInfo>();
-    private List<Product> dummyProducts = new List<Product>();
+    // private List<Product> dummyProducts = new List<Product>();
     private List<SaleInfo> dummySales = new List<SaleInfo>();
     private RemoteJson dummyExcel = RemoteJson.WithUri("https://excel2json.io/api/share/454ce21d1a3f482fbbbc4155d2dba14c");
 
     private void Stop() { int x = 0; int y = 0; int z = x / y; }
     private async void GetDb2Data()
     {
-        List<DataRow> rows = await RunQuery();
+        List<Table.Row> rows = await RunQuery();
         List<SaleInfo> sales = new();
         double counter = 0;
-        foreach (DataRow row in rows)
+        foreach (var row in rows)
         {
             sales.Add(new SaleInfo()
                 {
@@ -28,14 +33,72 @@
         db2Source = sales;
         quote = sales.Count.ToString();
     }
-    private async Task<List<DataRow>> RunQuery()
+    private async Task<List<Table.Row>> RunQuery()
     {
-        SQL dsna1 = new SQL(@"DSN=DSNA1;UID=C085365;PWD=M0NKEYS9;DATABASE=DSNA1;PROTOCOL=TCPIP;HOSTNAME=sbrysa1.ash.cpc.ibm.com;PORT=5000;QUERYTIMEOUT=600;", "select * from c.openh3 fetch first 50 rows only", Driver.Db2);
-        dsna1.Execute(true);
-        dsna1.Completed += QueryCompleted;
-        while (dsna1.Busy) { await Task.Delay(50); }
-        quote = dsna1.Response;
-        return dsna1.Table.AsEnumerable().ToList();
+        var sales = new List<SaleInfo>();
+        string[] names = new string[] {
+            "Intel CPU", "AMD CPU",
+            "Intel Motherboard", "AMD Motherboard", "Nvidia Motherboard",
+            "Nvidia GPU", "Gigabyte GPU", "Asus GPU", "AMD GPU", "MSI GPU",
+            "Corsair Memory", "Patriot Memory", "Skill Memory",
+            "Samsung HDD", "WD HDD", "Seagate HDD", "Intel HDD", "Asus HDD",
+            "Samsung SSD", "WD SSD", "Seagate SSD", "Intel SSD", "Asus SSD",
+            "Samsung Monitor", "Asus Monitor", "LG Monitor", "HP Monitor" };
+        string[] countries = new string[] {
+            "USA", "UK", "France", "Canada", "Poland",
+            "Denmark", "Croatia", "Australia", "Seychelles",
+            "Sweden", "Germany", "Japan", "Ireland",
+            "Barbados", "Jamaica", "Cuba", "Spain", };
+        string[] status = new string[] { "Packing", "Shipped", "Delivered" };
+        var cloud = new cloudant.Db() { Database = "secrets" };
+        var cnxns = await cloud.Doc_getById("cnxns");
+        // dsna1.Table.AsEnumerable().ToList();
+        if (cnxns != null)
+        {
+            var itms = cnxns["items"];
+            if (itms != null)
+            {
+                var db2b1 = itms["a1_central"];
+                if (db2b1 != null)
+                {
+                    var qry = await db2online.Data.Execute(db2b1, "select * from c.openi fetch first 50 rows only");
+                    foreach (var rw in qry.Item1.AsEnumerable)
+                    {
+                        var price = GetRandomNumber(10000, 90000) / 100;
+                        var items = GetRandomNumber(4, 30);
+                        var value = Math.Round(price * items);
+                        var margin = GetRandomNumber(2, 5);
+                        var profit = Math.Round((price * margin / 100) * items);
+                        var country = GetRandomItem(countries);
+
+                        var item = new SaleInfo()
+                            {
+                                Country = country,
+                                CountryFlag = GetCountryFlag(country),
+                                Margin = margin,
+                                OrderDate = GetRandomDate(),
+                                OrderItems = items,
+                                OrderValue = value,
+                                ProductID = 1001 + rw.Index,
+                                ProductName = GetRandomItem(names),
+                                ProductPrice = price,
+                                Profit = Math.Round(profit),
+                                Status = GetRandomItem(status)
+                            };
+                        sales.Add(item);
+                    }
+                    this.dummySales = sales;
+                    return qry.Item1.AsEnumerable;
+                }
+            }
+        }
+        // SQL dsna1 = new SQL(@"DSN=DB2B1;UID=Q085365;PWD=jXZN60O1;DATABASE=DB2B1;PROTOCOL=TCPIP;HOSTNAME=sbrysb1.ash.cpc.ibm.com;PORT=446;QUERYTIMEOUT=600;", "select * from c.openi fetch first 50 rows only", Driver.Db2);
+        // dsna1.Execute(false);
+        // dsna1.Completed += QueryCompleted;
+        // while (dsna1.Busy) { await Task.Delay(50); }
+        // quote = dsna1.Response;
+        Debugger.Break();
+        return new List<Table.Row>();
     }
     private void QueryCompleted(object sender, ResponseEventArgs? e)
     {
@@ -56,12 +119,12 @@
                                                                                             //Stop();
     }
 
-    private void WroteFiles(object? sender, MongoEventArgs mea) { quote = $"The future depends on what you do today. - Mahatma Gandhi {mea.Products.Count}"; }
+    // private void WroteFiles(object? sender, MongoEventArgs mea) { quote = $"The future depends on what you do today. - Mahatma Gandhi {mea.Products.Count}"; }
 
     private void GenerateData()
     {
-        var fh = new mongoFlaghouse.ReadWrite();
-        this.dummyProducts = fh.Read();
+        // var fh = new mongoFlaghouse.ReadWrite();
+        // this.dummyProducts = fh.Read();
         //Stop();
         string[] names = new string[] {
             "Intel CPU", "AMD CPU",
@@ -80,7 +143,7 @@
 
         var sales = new List<SaleInfo>();
 
-        for (var i = 0; i < 200; i++)
+        for (var i = 0; i < 100; i++)
         {
             var price = GetRandomNumber(10000, 90000) / 100;
             var items = GetRandomNumber(4, 30);

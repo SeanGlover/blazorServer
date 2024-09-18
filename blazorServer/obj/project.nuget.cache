@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JLSNKvsH2geSoIXmoUV+VEmcU5t9PfLB5EVHTE4tisI46djw+TEAPdcuoFtLdEFX4RNkpQOnLUj+NgWJ2ddgDA==",
+  "dgSpecHash": "hJ/PdmjDGdA=",
   "success": true,
   "projectFilePath": "C:\\Users\\SeanGlover\\source\\repos\\blazorServer\\blazorServer\\blazorServer.csproj",
   "expectedPackageFiles": [
@@ -74,5 +74,26 @@
     "C:\\Users\\SeanGlover\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\SeanGlover\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MongoDB.Driver' 2.15.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-7j9m-j397-g4wx",
+      "libraryId": "MongoDB.Driver",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Npgsql' 6.0.4 has a known high severity vulnerability, https://github.com/advisories/GHSA-x9vc-6hfv-hg8c",
+      "libraryId": "Npgsql",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

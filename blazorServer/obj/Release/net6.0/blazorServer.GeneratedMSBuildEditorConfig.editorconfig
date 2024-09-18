@@ -5,60 +5,67 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = blazorServer
 build_property.RootNamespace = blazorServer
-build_property.ProjectDir = C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\
+build_property.ProjectDir = C:\Users\SeanGlover\Source\Repos\SeanGlover\blazorServer\blazorServer\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\SeanGlover\source\repos\blazorServer\blazorServer
+build_property.MSBuildProjectDirectory = C:\Users\SeanGlover\Source\Repos\SeanGlover\blazorServer\blazorServer
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/App.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Pages/Counter.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Pages/FetchData.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Pages/Index.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Pages/UserInformation.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/SwaggerDoc.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3dhZ2dlckRvYy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/UserInformation.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlckluZm9ybWF0aW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Shared/SurveyPrompt.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/_Imports.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Shared/MainLayout.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-wkcee5525i
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Shared/NavMenu.razor]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-apuklt7hzg
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Pages/Error.cshtml]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Pages/_Host.cshtml]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SeanGlover/source/repos/blazorServer/blazorServer/Pages/_Layout.cshtml]
+[C:/Users/SeanGlover/Source/Repos/SeanGlover/blazorServer/blazorServer/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

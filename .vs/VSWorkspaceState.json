@@ -2,13 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\blazorServer",
-    "\\blazorServer\\Properties",
-    "\\blazorServer\\Shared",
-    "\\blazorServer\\wwwroot",
-    "\\blazorServer\\wwwroot\\css",
-    "\\blazorServer\\wwwroot\\css\\bootstrap",
-    "\\blazorServer\\wwwroot\\css\\open-iconic"
+    "\\blazorServer\\Pages"
   ],
-  "SelectedNode": "\\blazorServer",
+  "SelectedNode": "\\blazorServer\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

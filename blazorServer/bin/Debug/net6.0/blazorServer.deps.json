@@ -18,8 +18,9 @@
           "Swashbuckle.AspNetCore": "6.3.0",
           "System.Data.Odbc": "6.0.0",
           "System.Data.OleDb": "6.0.0",
-          "mongoFlaghouse": "1.0.0.0",
-          "mongoReadWrite": "1.0.0.0"
+          "cloudant": "1.0.0.0",
+          "DataTableAsync": "1.0.0.0",
+          "db2online": "1.0.0.0"
         },
         "runtime": {
           "blazorServer.dll": {}
@@ -761,19 +762,35 @@
           }
         }
       },
-      "mongoFlaghouse/1.0.0.0": {
+      "cloudant/1.0.0.0": {
         "runtime": {
-          "mongoFlaghouse.dll": {
+          "cloudant.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
-      "mongoReadWrite/1.0.0.0": {
+      "DataTableAsync/1.0.0.0": {
         "runtime": {
-          "mongoReadWrite.dll": {
+          "DataTableAsync.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "db2online/1.0.0.0": {
+        "runtime": {
+          "db2online.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "System.Net.Http.WinHttpHandler/8.0.0.0": {
+        "runtime": {
+          "System.Net.Http.WinHttpHandler.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       }
@@ -1268,12 +1285,22 @@
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
-    "mongoFlaghouse/1.0.0.0": {
+    "cloudant/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "mongoReadWrite/1.0.0.0": {
+    "DataTableAsync/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "db2online/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Net.Http.WinHttpHandler/8.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

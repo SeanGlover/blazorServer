@@ -26,6 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="cloudant">
+      <HintPath>..\..\cloudant\cloudant\bin\Debug\cloudant.dll</HintPath>
+    </Reference>
+    <Reference Include="DataTableAsync">
+      <HintPath>..\..\DataTableAsync\DataTableAsync\bin\Debug\DataTableAsync.dll</HintPath>
+    </Reference>
+    <Reference Include="db2online">
+      <HintPath>..\..\db2online\db2online\bin\Debug\db2online.dll</HintPath>
+    </Reference>
     <Reference Include="mongoFlaghouse">
       <HintPath>..\..\mongoFlaghouse\mongoFlaghouse\bin\Debug\net6.0\mongoFlaghouse.dll</HintPath>
     </Reference>
