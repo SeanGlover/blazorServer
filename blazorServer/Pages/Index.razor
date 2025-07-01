@@ -5,11 +5,16 @@
 @using db2online
 @using DataTableAsync
 @{
-    // like Main() ??
     GenerateData();
-    GetDb2Data();
 }
 @code {
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await GetDb2Data();
+        }
+    }
     private string quote = "The future depends on what you do today...";
     private List<SaleInfo> db2Source = new List<SaleInfo>();
     // private List<Product> dummyProducts = new List<Product>();
@@ -17,7 +22,7 @@
     private RemoteJson dummyExcel = RemoteJson.WithUri("https://excel2json.io/api/share/454ce21d1a3f482fbbbc4155d2dba14c");
 
     private void Stop() { int x = 0; int y = 0; int z = x / y; }
-    private async void GetDb2Data()
+    private async Task<Table> GetDb2Data()
     {
         List<Table.Row> rows = await RunQuery();
         List<SaleInfo> sales = new();
@@ -32,6 +37,7 @@
         }
         db2Source = sales;
         quote = sales.Count.ToString();
+        return new Table(rows);
     }
     private async Task<List<Table.Row>> RunQuery()
     {
@@ -61,7 +67,7 @@
                 var db2b1 = itms["a1_central"];
                 if (db2b1 != null)
                 {
-                    var qry = await db2online.Data.Execute(db2b1, "select * from c.openi fetch first 50 rows only");
+                    var qry = await db2online.Data.Execute(db2b1, "select * from c.openi fetch first 10 rows only");
                     foreach (var rw in qry.Item1.AsEnumerable)
                     {
                         var price = GetRandomNumber(10000, 90000) / 100;

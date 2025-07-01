@@ -115,3 +115,7 @@ C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\bin\Debug\net6.0\clou
 C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\bin\Debug\net6.0\DataTableAsync.pdb
 C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\bin\Debug\net6.0\db2online.pdb
 C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\bin\Debug\net6.0\System.Net.Http.WinHttpHandler.xml
+C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\bin\Debug\net6.0\blazorServer.staticwebassets.endpoints.json
+C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\obj\Debug\net6.0\staticwebassets.build.endpoints.json
+C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\obj\Debug\net6.0\staticwebassets\msbuild.blazorServer.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\SeanGlover\source\repos\blazorServer\blazorServer\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
